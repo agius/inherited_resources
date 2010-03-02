@@ -41,8 +41,9 @@ module InheritedResources
     # PUT /resources/1
     def update(options={}, &block)
       object = resource
-
-      if update_resource(object, params[resource_instance_name])
+      attributes = params[resource_instance_name] or params
+      
+      if update_resource(object, attributes)
         options[:location] ||= resource_url rescue nil
       end
 
